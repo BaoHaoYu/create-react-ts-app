@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader'
 import logo from '../logo.svg'
 // @ts-ignore
 import css from './App.scss'
-import RouterRoot from './RouterRoot/RouterRoot'
+import RouterRoot from '../router/RouterRoot'
 
 function Main() {
   return (

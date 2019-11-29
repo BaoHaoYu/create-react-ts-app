@@ -107,8 +107,8 @@ inquirer
 
     console.log("build in " + rootPath);
 
-    spawn.sync(answers.packageManager === "npm" ? "npm install" : "yarn", {
-      cwd: rootPath,
-      stdio: "inherit"
-    });
+    // spawn.sync(answers.packageManager === "npm" ? "npm install" : "yarn", {
+    //   cwd: rootPath,
+    //   stdio: "inherit"
+    // });
   });
