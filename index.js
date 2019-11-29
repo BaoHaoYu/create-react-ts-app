@@ -42,15 +42,16 @@ inquirer
     },
     {
       type: "confirm",
-      message: "react-router?",
+      message: "use react-router?",
       name: "useReactRouter",
       default: false
     },
     {
-      type: "confirm",
-      message: "mobx?",
-      name: "useMobx",
-      default: false
+      type: "list",
+      message: "state manager?",
+      name: "stateManager",
+      choices: ["none", "mobx", "redux"],
+      default: "mobx"
     },
     {
       type: "list",
@@ -82,12 +83,26 @@ inquirer
       );
     }
 
-    if (answers.useMobx) {
-      basePkg = megePkg(
-        rootPath,
-        basePkg,
-        path.join(__dirname, "src/mobx/package.json")
-      );
+    if (answers.stateManager !== "none") {
+      if (answers.stateManager === "mobx") {
+        basePkg = megePkg(
+          rootPath,
+          basePkg,
+          path.join(__dirname, "src/mobx/package.json")
+        );
+      }
+
+      if (answers.stateManager === "redux") {
+        fse.copySync(
+          path.join(__dirname, "src/redux/src"),
+          path.join(rootPath, "src")
+        );
+        basePkg = megePkg(
+          rootPath,
+          basePkg,
+          path.join(__dirname, "src/redux/package.json")
+        );
+      }
     }
 
     console.log("build in " + rootPath);
