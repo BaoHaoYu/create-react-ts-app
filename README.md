@@ -1,4 +1,4 @@
-# typescript + react + sass
+# 自制不完整的脚手架
 
 ## 运行
 
