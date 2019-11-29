@@ -1,0 +1,19 @@
+{
+  "name": "create-react-ts-app",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "build": "node index.js"
+  },
+  "dependencies": {
+    "cross-spawn": "^7.0.1",
+    "execa": "^3.4.0",
+    "fs-extra": "^8.1.0",
+    "globby": "^10.0.1",
+    "inquirer": "^7.0.0",
+    "prettier": "^1.19.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^6.5.0"
+  }
+}
