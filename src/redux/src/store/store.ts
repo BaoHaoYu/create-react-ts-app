@@ -1,15 +1,20 @@
-import { combineReducers, createStore } from "redux";
-import compose from "./compose";
+import { combineReducers, createStore } from 'redux'
+import compose from './compose'
 
-let storeObj = {};
+const storeObj = {}
 
-const store = createStore({}, compose);
+const store = createStore(combineReducers({}), compose)
 
-function addReducers(obj: any) {
-  storeObj = { ...storeObj, ...obj };
-  store.replaceReducer(combineReducers({ ...storeObj, ...obj }));
+/**
+ * 动态添加reducer
+ * @param name reducer的键名
+ * @param reducer reducer函数
+ */
+function addReducer(name: string, reducer: any) {
+  storeObj[name] = reducer
+  store.replaceReducer(combineReducers(storeObj))
 }
 
-export { addReducers };
+export { addReducer }
 
-export default store;
+export default store
