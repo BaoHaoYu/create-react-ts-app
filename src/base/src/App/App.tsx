@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
-// @ts-ignore
 import logo from '../logo.svg'
-// @ts-ignore
 import css from './App.scss'
 
 function Main() {
