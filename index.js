@@ -4,32 +4,20 @@ const path = require("path");
 const prettier = require("prettier");
 const cwdpath = process.cwd();
 const spawn = require("cross-spawn");
+const _ = require("lodash");
 
 function megePkg(rootPath, basePkg, pkgFile) {
   const pkg = fse.readJSONSync(pkgFile, { encoding: "utf-8" });
-  if (pkg.dependencies) {
-    basePkg.dependencies = {
-      ...basePkg.dependencies,
-      ...pkg.dependencies
-    };
-  }
+  const newPkg = _.merge(basePkg, pkg);
 
-  if (pkg.devDependencies) {
-    basePkg.devDependencies = {
-      ...basePkg.devDependencies,
-      ...pkg.devDependencies
-    };
-  }
-
-  const formatBasePkg = prettier.format(JSON.stringify(basePkg), {
+  const formatNewPkg = prettier.format(JSON.stringify(newPkg), {
     parser: "json"
   });
-
-  fse.writeFileSync(path.join(rootPath, "package.json"), formatBasePkg, {
+  fse.writeFileSync(path.join(rootPath, "package.json"), formatNewPkg, {
     encoding: "utf-8"
   });
 
-  return basePkg;
+  return newPkg;
 }
 
 inquirer
@@ -42,7 +30,7 @@ inquirer
     },
     {
       type: "confirm",
-      message: "use react-router?",
+      message: "react-router?",
       name: "useReactRouter",
       default: false
     },
@@ -52,6 +40,12 @@ inquirer
       name: "stateManager",
       choices: ["none", "mobx", "redux"],
       default: "mobx"
+    },
+    {
+      type: "confirm",
+      message: "husky?",
+      name: "useHusky",
+      default: false
     },
     {
       type: "list",
@@ -103,6 +97,14 @@ inquirer
           path.join(__dirname, "src/redux/package.json")
         );
       }
+    }
+
+    if (answers.useHusky) {
+      basePkg = megePkg(
+        rootPath,
+        basePkg,
+        path.join(__dirname, "src/husky/package.json")
+      );
     }
 
     console.log("build in " + rootPath);
