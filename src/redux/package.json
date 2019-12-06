@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@types/react-redux": "^6.0.9",
-    "@types/react-router-dom": "^5.1.2",
+    "@types/redux-actions": "^2.6.1",
     "@types/redux-logger": "^3.0.7"
   }
 }
