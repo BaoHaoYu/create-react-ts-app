@@ -16,19 +16,14 @@ export interface IAsyncComponent {
   children?: any
 }
 
-/**
- * 异步加载页面组件
- * @param {IAsyncComponent} p
- */
-export default function asyncComponent(load: loadAsync | React.ComponentType<any>, children?: any) {
-  const PageComponent = React.lazy(load as loadAsync)
-
-  const AsyncComponent = () => {
-    return (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <PageComponent>{children}</PageComponent>
-      </React.Suspense>
-    )
-  }
-  return AsyncComponent
+export const AsyncComponent = (p: {
+  load: loadAsync | React.ComponentType<any>
+  children?: any
+}) => {
+  const PageComponent = React.lazy(p.load as loadAsync)
+  return (
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <PageComponent>{p.children}</PageComponent>
+    </React.Suspense>
+  )
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Route, RouteProps } from 'react-router-dom'
-import asyncLoad, { IAsyncComponent } from 'src/components/AsyncComponent/AsyncComponent'
+import { AsyncComponent, IAsyncComponent } from 'src/components/AsyncComponent/AsyncComponent'
 
 export interface IRouteItem extends RouteProps, IAsyncComponent {
   /**
@@ -22,9 +22,6 @@ function setConfig(p: IRouteItem[]): React.ReactNodeArray {
     const _list: any[] = []
     deepChildren.map((item: IRouteItem) => {
       keyIndex = keyIndex + 1
-      const component = item.load
-        ? asyncLoad(item.load, item.children && _deep(item.children))
-        : item.component
       _list.push(
         <Route
           path={item.path}
@@ -33,9 +30,13 @@ function setConfig(p: IRouteItem[]): React.ReactNodeArray {
           strict={item.strict}
           location={item.location}
           render={item.render}
-          key={keyIndex + ''}
-          component={component}
-        />
+          key={keyIndex.toString()}
+          component={item.component}
+        >
+          {item.load && (
+            <AsyncComponent load={item.load} children={item.children && _deep(item.children)} />
+          )}
+        </Route>
       )
     })
     return _list
