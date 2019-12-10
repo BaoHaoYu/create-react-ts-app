@@ -13,7 +13,7 @@ export const add = (fromMeta?: string) => {
   return {
     type: types.add,
     payload: { number: 1 },
-    meta: meta('删除', fromMeta),
+    meta: meta('增加', fromMeta),
   }
 }
 
@@ -24,7 +24,7 @@ export const del = (fromMeta?: string) => (dispath: any, getState: any) => {
   dispath({
     type: types.del,
     payload: { number: 1 },
-    meta: meta('删除', fromMeta),
+    meta: meta('减少', fromMeta),
   })
 }
 
