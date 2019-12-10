@@ -39,14 +39,12 @@ const defaultData = {
 const reducer = handleActions(
   {
     [types.add]: (state, { payload }) => {
-      const s = { ...state }
-      s.count = s.count + 1
-      return s
+      state.count = state.count + 1
+      return { ...state }
     },
     [types.del]: (state, { payload }) => {
-      const s = { ...state }
-      s.count = s.count - 1
-      return s
+      state.count = state.count - 1
+      return { ...state }
     },
   },
   defaultData
