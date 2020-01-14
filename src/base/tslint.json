@@ -9,6 +9,7 @@
     "no-console": false,
     "no-floating-promises": false,
     "object-literal-sort-keys": false,
+    "jsx-no-lambda": false,
     "prettier": true
   },
   "rulesDirectory": ["tslint-plugin-prettier"],

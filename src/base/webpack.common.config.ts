@@ -60,6 +60,9 @@ const webpackConfig: Partial<webpack.Configuration> = {
               sourceMap: !isProduction,
             },
           },
+          {
+            loader: path.resolve('./loader/sass-tips-loader/index.ts'),
+          },
         ],
       },
       {
